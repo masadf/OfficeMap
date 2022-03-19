@@ -1,10 +1,14 @@
-import {Component} from "./components/Component"
+import { EmployeePlace } from "./components/employee-place/EmployeePlace";
 
+import './index.scss';
 function App() {
   return (
     <div className="App">
-        <Component></Component>
-        <div>А ЭТО ОБЫЧНЫЙ БЛОК HTML</div>
+      <div className="wrapper">
+        <div className="content">
+          <EmployeePlace></EmployeePlace>
+        </div>
+      </div>
     </div>
   );
 }
