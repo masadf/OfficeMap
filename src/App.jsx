@@ -1,4 +1,5 @@
 import { EmployeePlace } from "./components/employee-place/EmployeePlace";
+import React, {useState, useEffect} from 'react';
 
 import './index.scss';
 function App() {

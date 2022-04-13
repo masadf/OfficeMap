@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styles from "./EmployeePlace.module.scss"
 import { ModalWindow } from "./modalWindow/ModalWindow";
+import React from 'react';
 
 export const EmployeePlace=()=>{
     const [modal, openModal] = useState(false);
