@@ -1,21 +1,33 @@
 import styles from "./ModalWindow.module.scss"
 import React from 'react';
 
-export const ModalWindow=({openModal,modal})=>{
+export const ModalWindow=({openModal,modal,data})=>{
     return(
        <div className={modal ? styles.wrapper : styles.none} onClick={()=>openModal(false)}>
            <div className={styles.container} onClick={e=>e.stopPropagation()}>
                 <div className={styles.element}>
-                    <span>ФИО</span>
-                    <input type="text" />
+                    <span>Фамилия</span>
+                    <span>{data.surname} </span>
                 </div>
                 <div className={styles.element}>
-                    <span>Должность</span>
-                    <input type="text" />
+                    <span>Имя</span>
+                    <span> {data.name}</span>
                 </div>
                 <div className={styles.element}>
-                    <span>Сайт</span>
-                    <input type="text" />
+                    <span>Кабинет</span>
+                    <span>{data.cabinet}</span>
+                </div>
+                <div className={styles.element}>
+                    <span>Фамилия</span>
+                    <span>{data.surname} </span>
+                </div>
+                <div className={styles.element}>
+                    <span>Имя</span>
+                    <span> {data.name}</span>
+                </div>
+                <div className={styles.element}>
+                    <span>Кабинет</span>
+                    <span>{data.cabinet}</span>
                 </div>
            </div>
        </div> 

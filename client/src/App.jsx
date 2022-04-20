@@ -10,9 +10,10 @@ function App() {
       res => res.json()
     ).then(
       data => {
-        setData(data);
+        setData(data.data);
+
       }
-    ) 
+    )
   }, []);
   return (
     <div className="App">
@@ -20,16 +21,11 @@ function App() {
         <div className="header">
           <Header></Header>
         </div>
-        <div className="content">
-          <EmployeePlace num={1} />
-          <EmployeePlace num={2} />
-          <EmployeePlace num={3} />
-          <EmployeePlace num={4} />
-          <EmployeePlace num={5} />
-          <EmployeePlace num={6} />
-          <EmployeePlace num={7} />
-          <EmployeePlace num={8} />
-          <EmployeePlace num={9} />
+        <div className="content" >
+          {data.map((element)=>
+            <EmployeePlace data={element}/>
+        
+          )}
         </div>
       </div>
     </div>
