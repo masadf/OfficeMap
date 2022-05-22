@@ -3,14 +3,14 @@ import styles from "./EmployeePlace.module.scss"
 import { ModalWindow } from "./modalWindow/ModalWindow";
 import React from 'react';
 
-export const EmployeePlace=({num})=>{
+export const EmployeePlace = ({ data }) => {
     const [modal, openModal] = useState(false);
-    return(
+    return (
         <div className={styles.wrapper} >
-            <div className={styles.container} onClick={()=>openModal(true)}>
-                {num}
+            <div className={styles.container} onClick={() => openModal(true)}>
+                {data.name}
             </div>
-            <ModalWindow openModal={openModal} modal={modal}></ModalWindow>
+            <ModalWindow openModal={openModal} modal={modal} data={data}></ModalWindow>
         </div>
     )
 }
