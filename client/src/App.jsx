@@ -3,10 +3,11 @@ import React, { useState, useEffect } from 'react';
 
 import './index.css';
 import { Header } from "./components/header/Header";
+import {Login} from "./components/login/Login"
 function App() {
   const [data, setData] = useState([{}]);
   useEffect(() => {
-    fetch("http://127.0.0.1:5000/lolo").then(
+    fetch("http://127.0.0.1:5000/personData").then(
       res => res.json()
     ).then(
       data => {
@@ -22,10 +23,8 @@ function App() {
           <Header></Header>
         </div>
         <div className="content" >
-          {data.map((element)=>
-            <EmployeePlace data={element}/>
-        
-          )}
+          <Login></Login>
+         
         </div>
       </div>
     </div>
