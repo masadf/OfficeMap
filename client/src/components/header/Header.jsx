@@ -1,7 +1,7 @@
 import styles from "./Header.module.scss"
 import logo from "../../images/logo.svg"
 import cross from "../../images/cross.svg"
-import { useState } from "react";
+import React, { useState } from "react";
 export const Header = () => {
     const [menu, setMenu] = useState(false);
     return (
