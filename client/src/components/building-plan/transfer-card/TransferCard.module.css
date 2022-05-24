@@ -1,0 +1,12 @@
+.wrapper {
+    width: 100%;
+    padding: 1.6rem;
+    border: 0.11rem solid #252525;
+    cursor: pointer;
+    border-radius: .5rem;
+}
+
+.header {
+    font-size: 1.7rem;
+    font-weight: 600;
+}

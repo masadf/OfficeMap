@@ -1,12 +1,12 @@
 import { EmployeePlace } from "./components/employee-place/EmployeePlace";
 import React, { useState, useEffect } from 'react';
 
-import './index.scss';
+import './index.css';
 import { Header } from "./components/header/Header";
 function App() {
   const [data, setData] = useState([{}]);
   useEffect(() => {
-    fetch("http://127.0.0.1:5000/").then(
+    fetch("http://127.0.0.1:5000/lolo").then(
       res => res.json()
     ).then(
       data => {

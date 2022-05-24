@@ -1,4 +1,4 @@
-import styles from "./Header.module.scss"
+import styles from "./Header.module.css"
 import logo from "../../images/logo.svg"
 import cross from "../../images/cross.svg"
 import { useState } from "react";

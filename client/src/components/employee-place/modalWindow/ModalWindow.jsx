@@ -1,4 +1,4 @@
-import styles from "./ModalWindow.module.scss"
+import styles from "./ModalWindow.module.css"
 import React from 'react';
 
 export const ModalWindow=({openModal,modal,data})=>{

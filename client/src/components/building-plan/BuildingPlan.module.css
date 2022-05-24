@@ -1,0 +1,16 @@
+.wrapper {
+    justify-self: auto;
+    display: grid;
+    gap: 2rem;
+    width: 100%;
+}
+
+.header {
+    font-size: 2.2rem;
+    font-weight: 600;
+}
+
+.items {
+    display: grid;
+    gap: 1rem;
+}

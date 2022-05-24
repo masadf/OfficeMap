@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styles from "./EmployeePlace.module.scss"
+import styles from "./EmployeePlace.module.css"
 import { ModalWindow } from "./modalWindow/ModalWindow";
 import React from 'react';
 
