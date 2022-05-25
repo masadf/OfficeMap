@@ -45,6 +45,7 @@
     font-weight: 400;
     color: #CBCBCB;
     transition: .3s;
+    text-decoration: none;
 }
 
 .burger {

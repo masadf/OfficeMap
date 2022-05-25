@@ -1,33 +1,31 @@
-import { EmployeePlace } from "./components/employee-place/EmployeePlace";
-import React, { useState, useEffect } from 'react';
+
+import React from 'react';
 
 import './index.css';
-import { Header } from "./components/header/Header";
-import {Login} from "./components/login/Login"
+import { AuthHeader } from "./components/header/AuthHeader";
+import { Login } from "./components/login/Login"
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+} from "react-router-dom";
+import { Registration } from './components/registration/Registration';
 function App() {
-  const [data, setData] = useState([{}]);
-  useEffect(() => {
-    fetch("http://127.0.0.1:5000/personData").then(
-      res => res.json()
-    ).then(
-      data => {
-        setData(data.data);
-
-      }
-    )
-  }, []);
-  return (
+  return (<BrowserRouter>
     <div className="App">
       <div className="wrapper">
         <div className="header">
-          <Header></Header>
+          <AuthHeader></AuthHeader>
         </div>
         <div className="content" >
-          <Login></Login>
-         
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/registration" element={<Registration />} />
+          </Routes>
         </div>
       </div>
     </div>
+  </BrowserRouter>
   );
 }
 
