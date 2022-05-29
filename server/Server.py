@@ -1,39 +1,55 @@
-from crypt import methods
-from email import header
-from flask_cors import CORS
-from manager.DataManager import DataManager
-from flask import Flask, request
-from manager.UsersDBManager import UsersDBManager
+from flask import Flask, request, make_response
+from controller.UserController import UserController
+from manager.EmployeeDBManager import EmployeeDBManager
+from service.TokenService import TokenService
 app = Flask(__name__)
 
-
-CORS(app)
-
-usersDBManager = UsersDBManager()
+employeeDBManager = EmployeeDBManager()
 
 
-@app.route('/personData')
-def getPersonData():
-    manager = DataManager()
-    return {"data": manager.getData()}
 
-
-@app.route('/authorization', methods=["POST"])
-def authorization():
-    headers = {'Access-Control-Allow-Origin': '*'}
-    userdata = request.get_json()
-    if usersDBManager.checkUserExist(userdata["login"], userdata["password"]):
-        return {"success": True, "msg": "Успешно!"}, 200, headers
-    return {"success": False, "msg": "Пароль или логин неверен!"}, 400, headers
+@app.route('/login', methods=["POST"])
+def login():
+    request_data = request.get_json()
+    return UserController.login(request_data["username"], request_data["password"])
 
 
 @app.route('/registration', methods=["POST"])
 def registration():
-    headers = {'Access-Control-Allow-Origin': '*'}
-    userdata = request.get_json()
-    if usersDBManager.addUser(userdata["login"], userdata["password"]):
-        return {"success": True, "msg": "Успешно!"}, 200, headers
-    return {"success": False, "msg": "Логин занят!"}, 400, headers
+    request_data = request.get_json()
+    return UserController.registration(request_data["username"], request_data["password"])
+
+
+@app.route('/logout', methods=["POST"])
+def logout():
+    token = request.cookies.get("token")
+    return UserController.logout(token)
+
+@app.route('/refresh', methods=["GET"])
+def refresh():
+    return TokenService.verify_tokens(request)
+
+
+@app.route('/employee')
+def get_employees():
+    return {"data": employeeDBManager.getPersonNames()}
+
+
+@app.route('/aboutEmployee', methods=["POST"])
+def get_employee_info():
+    return {"data": employeeDBManager.getInfoAboutPerson(request.get_json()["_id"])}
+
+
+@app.after_request
+def after_request(response):
+    response.headers.add('Access-Control-Allow-Origin',
+                         'http://localhost:3000')
+    response.headers.add('Access-Control-Allow-Headers',
+                         'Content-Type,Authorization')
+    response.headers.add('Access-Control-Allow-Methods',
+                         'GET,PUT,POST,DELETE,OPTIONS')
+    response.headers.add('Access-Control-Allow-Credentials', 'true')
+    return response
 
 
 if __name__ == '__main__':
