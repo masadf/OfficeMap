@@ -9,12 +9,12 @@ export const AuthHeader = () => {
     return (
         <div className={styles.wrapper}>
             <div className={styles.content}>
-                <div className={styles.title}>
+                <Link to="/" className={styles.title}>
                     <div className={styles.icon}>
                         <img src={logo} alt="" />
                     </div>
                     DEPARTMENT OF PHYSICS
-                </div>
+                </Link>
 
                 <div className={styles.options}>
                     <Link className={styles.place} to={"/registration"}>Регистрация</Link>

@@ -8,7 +8,7 @@ export const EmployeePlace = ({ data }) => {
     return (
         <div className={styles.wrapper} >
             <div className={styles.container} onClick={() => openModal(true)}>
-                {data.name}
+                {data._id}
             </div>
             <ModalWindow openModal={openModal} modal={modal} data={data}></ModalWindow>
         </div>

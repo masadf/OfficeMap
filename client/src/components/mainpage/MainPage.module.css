@@ -1,0 +1,11 @@
+.wrapper {
+    position: absolute;
+    top: 0;
+    display: grid;
+    height: 100vh;
+    align-content: center;
+}
+
+.select {
+    width: 200px;
+}
