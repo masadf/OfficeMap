@@ -10,6 +10,7 @@ import VectorMap, {
   } from 'devextreme-react/vector-map';
 
 import { roomsData, buildingData, testData } from './rooms.js';
+import { dt } from './maintest.js'
 
 
 const projection = {
@@ -41,7 +42,7 @@ export const Map = () => {
           name="building">
         </Layer>
         <Layer
-          dataSource={testData}
+          dataSource={dt}
           name="rooms"
           borderWidth={3}>
           <Label enabled={true} dataField="name"></Label>
