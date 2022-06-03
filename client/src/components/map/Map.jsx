@@ -1,6 +1,9 @@
 import 'devextreme/dist/css/dx.common.css';
 import 'devextreme/dist/css/dx.light.css';
 
+import rooms from './mapdata/testroom.json';
+import background from './mapdata/background.json';
+
 import React, { useCallback } from 'react';
 
 import VectorMap, {
@@ -9,8 +12,6 @@ import VectorMap, {
     Label,
   } from 'devextreme-react/vector-map';
 
-import { roomsData, buildingData, testData } from './rooms.js';
-import { dt } from './maintest.js'
 
 
 const projection = {
@@ -32,19 +33,20 @@ export const Map = () => {
     return(
     <VectorMap
         id="vector-map"
-        maxZoomFactor={5}
+        maxZoomFactor={10}
         projection={projection}
         onClick={clickFunc}
       >
         <Layer
-          dataSource={buildingData}
+          dataSource={background}
           hoverEnabled={true}
           name="building">
         </Layer>
         <Layer
-          dataSource={dt}
+          dataSource={rooms}
           name="rooms"
-          borderWidth={3}>
+          customize={customizeLayer}
+          borderWidth={0}>
           <Label enabled={true} dataField="name"></Label>
         </Layer>
         <Tooltip
@@ -61,3 +63,11 @@ function customizeTooltip(arg) {
     }
     return null;
   }
+
+function customizeLayer(elements) {
+  elements.forEach((element) => {
+    element.applySettings({
+      color: element.attribute('fill'),
+    });
+  });
+}

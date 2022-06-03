@@ -465,14 +465,6 @@ export const testData = {
       ],
     };
 
-// const fs = require('fs');
-
-// let data = JSON.stringify(roomsData);
-
-// fs.writeFile('data2.json', data);
-
-console.log(roomsData.features[0].geometry.coordinates[0][1][0])
-
 // for (var r in roomsData.features) {
 //   console.log(r.type)
 // }
