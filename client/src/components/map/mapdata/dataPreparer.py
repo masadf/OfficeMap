@@ -1,9 +1,18 @@
 import json
 
-is_scaling = False 
-is_mooving = False
-is_naming = True
+from matplotlib.pyplot import sca
 
+is_scaling = False
+is_mooving = True
+is_naming = False 
+is_color = False
+
+scale = 30
+moove_x = 0
+moove_y = 10
+
+fname_rooms = ""
+fname_back  = ""
 
 def scaling(scale_factor):
     for feature in data["features"]:
@@ -21,34 +30,39 @@ def rename(new_name):
     for feature in data["features"]:
         feature["properties"]["name"] = new_name
 
+def recolor(change_color):
+    for feature in data["features"]:
+        feature["properties"]["fill"] = change_color 
 
 
-with open('testroom.json') as f:
+with open(fname_rooms) as f:
     data = json.load(f)
 
 if is_scaling:
-    scaling(30)
+    scaling(scale)
 if is_mooving:
-    mooving(0, -30)
+    mooving(moove_x, moove_y)
 if is_naming:
     for i in range(len(data["features"])):
         rename("Anton_DIBIL")
 
-with open('testroom.json', 'w') as f:
+with open(fname_rooms, 'w') as f:
     json.dump(data, f)
 
 # -----------------------------------------------------------
 
 
-with open('background.json') as f:
+with open(fname_back) as f:
     data = json.load(f)
 
 if is_scaling:
-    scaling(30)
+    scaling(scale)
 if is_mooving:
-    mooving(0, -30)
+    mooving(moove_x, moove_y)
+if is_color:
+    recolor("#999999")
 
-with open('background.json', 'w') as f:
+with open(fname_back, 'w') as f:
     json.dump(data, f)
 
 

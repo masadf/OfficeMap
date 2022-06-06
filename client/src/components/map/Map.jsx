@@ -1,8 +1,17 @@
 import 'devextreme/dist/css/dx.common.css';
 import 'devextreme/dist/css/dx.light.css';
 
-import rooms from './mapdata/testroom.json';
-import background from './mapdata/background.json';
+
+import first_rooms from './mapdata/1st_plan/1st_rooms.json'; 
+import first_background from './mapdata/1st_plan/1st_background.json';
+import second_rooms from './mapdata/2nd_plan/2nd_rooms.json';
+import second_background from './mapdata/2nd_plan/2nd_background.json'; 
+import third_rooms from './mapdata/3rd_plan/3rd_rooms.json';
+import third_background from './mapdata/3rd_plan/3rd_background.json';
+import fourth_rooms from './mapdata/4th_plan/4th_rooms.json';
+import fourth_background from './mapdata/4th_plan/4th_background.json';
+import fifth_rooms from './mapdata/5th_plan/5th_rooms.json';
+import fifth_background from './mapdata/5th_plan/5th_background.json'; 
 
 import React, { useCallback } from 'react';
 
@@ -38,15 +47,16 @@ export const Map = () => {
         onClick={clickFunc}
       >
         <Layer
-          dataSource={background}
+          dataSource={first_background}
           hoverEnabled={true}
+          customize={customizeLayer}
           name="building">
         </Layer>
         <Layer
-          dataSource={rooms}
+          dataSource={first_rooms}
           name="rooms"
           customize={customizeLayer}
-          borderWidth={0}>
+          borderWidth={1}>
           <Label enabled={true} dataField="name"></Label>
         </Layer>
         <Tooltip
