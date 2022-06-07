@@ -1,11 +1,11 @@
 from flask import Flask, request, make_response
 from controller.UserController import UserController
 from manager.EmployeeDBManager import EmployeeDBManager
+from service.EmployeeService import EmployeeService
 from service.TokenService import TokenService
 app = Flask(__name__)
 
 employeeDBManager = EmployeeDBManager()
-
 
 
 @app.route('/login', methods=["POST"])
@@ -25,6 +25,7 @@ def logout():
     token = request.cookies.get("token")
     return UserController.logout(token)
 
+
 @app.route('/refresh', methods=["GET"])
 def refresh():
     return TokenService.verify_tokens(request)
@@ -32,7 +33,14 @@ def refresh():
 
 @app.route('/employee')
 def get_employees():
-    return {"data": employeeDBManager.getPersonNames()}
+    return make_response({"data": EmployeeService.get_data()}, 200)
+
+
+@app.route('/employee/set-cab',methods=["POST"])
+def set_employee_cab():
+    request_data = request.get_json()
+    EmployeeService.set_cabinet(request_data["id"], request_data["cabNum"])
+    return make_response({"msg": "Успешно!"}, 200)
 
 
 @app.route('/aboutEmployee', methods=["POST"])

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Map from "../map/Map"
 import Select from 'react-select'
 import styles from "./MainPage.module.css"
 export const MainPage = ({ employeeData }) => {
@@ -20,13 +21,8 @@ export const MainPage = ({ employeeData }) => {
     }
     return (
         <div className={styles.wrapper}>
-            <Select onChange={handleSelect} className={styles.select} options={employeeData} />
-            <br />
-            <br />
-            <div>Имя: {employee._id}</div>
-            <div>Категория: {employee.category}</div>
-            <div>email: {employee.email}</div>
-            <div>ссыль: {employee.href}</div>
+            <Map></Map>
+        
         </div>
     )
 }

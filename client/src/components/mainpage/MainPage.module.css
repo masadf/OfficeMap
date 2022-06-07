@@ -1,9 +1,7 @@
 .wrapper {
     position: absolute;
-    top: 0;
-    display: grid;
-    height: 100vh;
-    align-content: center;
+    z-index: -1;
+    width: 100vw;
 }
 
 .select {
