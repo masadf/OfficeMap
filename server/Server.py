@@ -43,6 +43,14 @@ def set_employee_cab():
     return make_response({"msg": "Успешно!"}, 200)
 
 
+@app.route('/employee/remove-cab',methods=["POST"])
+def remove_employee_cab():
+    request_data = request.get_json()
+    print(request_data)
+    EmployeeService.remove_cabinet(request_data["id"])
+    return make_response({"msg": "Успешно!"}, 200)
+
+
 @app.route('/aboutEmployee', methods=["POST"])
 def get_employee_info():
     return {"data": employeeDBManager.getInfoAboutPerson(request.get_json()["_id"])}

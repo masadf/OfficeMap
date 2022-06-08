@@ -1,3 +1,4 @@
+from matplotlib import use
 from pymongo import MongoClient
 import hashlib
 from random import choice
@@ -31,7 +32,16 @@ class UsersService:
         salt = userData["salt"]
         if UsersService.getHashedPassword(password, salt) != userData["password"]:
             raise ValueError("Пароль или логин неверен!")
-        
+    
+    def is_admin(username):
+        userData = UsersService.users.find_one({
+            "username": username
+        })
+        if ("isAdmin" in userData):
+            return True
+        return False
 
     def getHashedPassword(password, salt):
         return hashlib.md5((password+salt).encode()).hexdigest()
+ 
+        
