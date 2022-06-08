@@ -1,14 +1,15 @@
-import styles from "./AddEmployeeModal.module.css"
+import styles from "../EmployeeModal.module.css"
 import React, { useContext, useState } from 'react';
 import Select from 'react-select'
-import { Context } from "../../..";
 import toast, { Toaster } from 'react-hot-toast';
-import rooms from '../mapdata/testroom.json';
+import { Context } from "../../../../..";
 
-export const AddEmployeeModal = ({ openModal, data,reRender }) => {
+
+export const AddEmployeeModal = ({ openModal, cabNum, reRender }) => {
     const { store } = useContext(Context);
     const [employee, setEmployee] = useState(undefined);
     const employeeHandler = (e) => {
+        console.log(e)
         setEmployee(e);
         if (e.cabNum) {
             toast("Данный сотрудник закреплён за другим местом!", {
@@ -45,15 +46,15 @@ export const AddEmployeeModal = ({ openModal, data,reRender }) => {
                     {employee?.href &&
                         <a className={styles.employee_href} href={employee.href}>Перейти к сотруднику</a>
                     }
-                    <button className={styles.enter_button} 
-                    onClick={() => { 
-                        store.setEmployeeCab(employee.value, data);
-                        openModal(false);
-                        console.log(reRender.current.instance.option("layers[1].dataSource",undefined))
-                        reRender.current.instance.render()
-                         }}>
-                             Закрепить
-                             </button>
+                    <button className={styles.enter_button}
+                        onClick={() => {
+                            store.setEmployeeCab(employee.value, cabNum);
+                            openModal(false);
+                            reRender.current.instance.option("layers[1].dataSource", undefined);
+                            reRender.current.instance.render();
+                        }}>
+                        Закрепить
+                    </button>
                 </div>
 
             </div>

@@ -1,20 +1,21 @@
 import 'devextreme/dist/css/dx.common.css';
 import 'devextreme/dist/css/dx.light.css';
 
-import rooms from './mapdata/testroom.json';
-import background from './mapdata/background.json';
 
-import React, { useCallback, useContext, useEffect, useRef, useState } from 'react';
+
+import React, { useCallback, useContext, useRef, useState } from 'react';
 
 import VectorMap, {
     Layer,
     Tooltip,
     Label,
+    ControlBar,
 } from 'devextreme-react/vector-map';
-import { Context } from "../../index";
 import { observer } from "mobx-react-lite"
-import { AddEmployeeModal } from './components/AddEmployeeModal';
-
+import { AddEmployeeModal } from './components/addEmployee/AddEmployeeModal';
+import { AboutEmployeeModal } from './components/aboutEmployee/AboutEmployeeModal';
+import styles from "./Map.module.css"
+import { Context } from '../../..';
 
 const projection = {
     to: ([l, lt]) => [l / 300, lt / 300],
@@ -22,17 +23,22 @@ const projection = {
 };
 
 
-const Map = () => {
+const Map = ({ background, rooms, design }) => {
     const { store } = useContext(Context);
     const [freeCabModal, openFreeCabModal] = useState(false);
-    const [cabData, setCabData] = useState(undefined);
-    const reRender=useRef();
+    const [infoCabModal, openInfoCabModal] = useState(false);
+    const [cabNum, setCabNum] = useState(undefined);
+    const reRender = useRef();
 
     const clickFunc = useCallback((e) => {
         if (e?.target?.layer?.name === 'rooms') {
+            setCabNum(e.target.attribute("index"));
             if (!store.getElementByIndex(e.target.attribute("index"))) {
-                setCabData(e.target.attribute("index"));
-                openFreeCabModal(true);
+                if (store.isAdmin) {
+                    openFreeCabModal(true);
+                }
+            } else {
+                openInfoCabModal(true);
             }
         }
 
@@ -44,7 +50,7 @@ const Map = () => {
         if (arg.layer.name === 'rooms') {
             let employee = store.getElementByIndex(arg.attribute("index"));
             if (employee) {
-                return { text: `${employee.name}` };
+                return { text: `${employee.name}\n${employee.category}` };
             } else {
                 return { text: "Место свободно" }
             }
@@ -58,27 +64,27 @@ const Map = () => {
                 let employee = store.getElementByIndex(element.attribute("index"));
                 if (employee !== undefined) {
                     let color;
-                    switch (employee.category){
+                    switch (employee.category) {
                         case "Руководители":
-                            color="purple";
+                            color = "purple";
                             break;
                         case "Научные сотрудники":
-                            color="blue";
+                            color = "blue";
                             break;
                         case "Преподаватели":
-                            color="orange";
+                            color = "orange";
                             break;
                         case "Административные сотрудники":
-                            color="#ea5455"
+                            color = "#ea5455"
                             break;
                         case "Учебный офис":
-                            color="#ff57b9"
+                            color = "#ff57b9"
                             break;
                         case "Аспиранты":
-                            color="#4ad4c3"
+                            color = "#4ad4c3"
                             break;
                         case "Студенты":
-                            color="#6d0f30"
+                            color = "#6d0f30"
                             break;
 
                     }
@@ -95,22 +101,33 @@ const Map = () => {
     }
 
     return (
-        <div >
+        <div className={styles.wrapper}>
             {freeCabModal &&
                 <AddEmployeeModal
                     openModal={openFreeCabModal}
-                    data={cabData}
+                    cabNum={cabNum}
+                    reRender={reRender}
+                />
+            }
+            {infoCabModal &&
+                <AboutEmployeeModal
+                    openModal={openInfoCabModal}
+                    cabNum={cabNum}
                     reRender={reRender}
                 />
             }
             <VectorMap
-                 ref={reRender}
+                className={styles.map}
+                ref={reRender}
                 id="vector-map"
+                zoomFactor={1.2}
+                redrawOnResize={true}
                 maxZoomFactor={10}
                 projection={projection}
                 onClick={clickFunc}
                 touchEnabled={true}
                 wheelEnabled={true}
+                loadingIndicator={true}
 
             >
                 <Layer
@@ -125,10 +142,23 @@ const Map = () => {
                     borderWidth={0}>
                     <Label enabled={true} dataField="name"></Label>
                 </Layer>
+                {design &&
+                    <Layer
+                        dataSource={design}
+                        name="design">
+                    </Layer>
+                }
+
+
                 <Tooltip
                     enabled={true}
                     customizeTooltip={customizeTooltip}
+                    margin={100}
                 ></Tooltip>
+                <ControlBar
+                    enabled={false}
+                    verticalAlignment="bottom"
+                />
             </VectorMap>
 
         </div>
