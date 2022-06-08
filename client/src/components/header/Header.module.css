@@ -49,6 +49,14 @@
     text-decoration: none;
 }
 
+.active {
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: white;
+    text-decoration: none;
+}
+
 .burger {
     padding: 0.5rem;
     display: none;
@@ -106,3 +114,5 @@
         font-size: 2.2rem;
     }
 }
+
+@media (max-width:400px) {}

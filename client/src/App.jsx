@@ -9,8 +9,8 @@ import {
   Navigate,
   Route
 } from "react-router-dom";
-import Registration from './components/registration/Registration';
-import { MainPage } from './components/mainpage/MainPage';
+import { LomoPage } from './components/officesMap/LomoPage';
+import { ChurchPage } from './components/officesMap/ChurchPage';
 import { Context } from "./index";
 import { observer } from "mobx-react-lite"
 import Header from "./components/header/Header";
@@ -39,20 +39,18 @@ function App() {
 
           </div>
           <div className="content">
-            <Routes>
-              {!store.isAuth && <Route path="/login" element={<Login />} />}
-              {!store.isAuth && <Route path="/registration" element={<Registration />} />}
-              <Route path="/" element={<MainPage employeeData={employeeData} />} />
-              <Route
-                path="/"
-                element={<Navigate to="/" replace />}
-              />
-            </Routes>
-          </div>
-        </div>
+            {!store.isAuth && <Routes><Route path="/login" element={<Login />} /></Routes>}
+              {store.isAuth &&
+                <Routes>
+                  < Route path="/lomo" element={<LomoPage />} />
+                  <Route path="/church" element={<ChurchPage />} />
+                </Routes>
+              }
+            </div>
+            </div>
       </div>
-    </BrowserRouter>
-  );
+        </BrowserRouter>
+        );
 }
 
-export default observer(App);
+        export default observer(App);

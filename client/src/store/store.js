@@ -7,6 +7,7 @@ export default class Store {
     user = "";
     isAuth = false;
     isLoading = true;
+    isAdmin = false;
     employeeData;
 
     constructor() {
@@ -15,6 +16,9 @@ export default class Store {
 
     setAuth(auth) {
         this.isAuth = auth;
+    }
+    setAdmin(admin) {
+        this.isAdmin = admin;
     }
 
     setUser(user) {
@@ -37,6 +41,7 @@ export default class Store {
             localStorage.setItem("token", response.data.token);
             this.setAuth(true);
             this.setUser(response.data.username);
+            this.setAdmin(response.data.isAdmin);
             return response
         } catch (e) {
             return e.response
@@ -67,6 +72,7 @@ export default class Store {
             localStorage.removeItem("token");
             this.setAuth(false);
             this.setUser("");
+            this.setAdmin(false);
         } catch (e) {
             console.log(e);
         } finally {
@@ -86,9 +92,11 @@ export default class Store {
             localStorage.setItem("token", response.data.token);
             this.setAuth(true);
             this.setUser(response.data.username);
+            this.setUser(response.data.isAdmin);
         } catch (e) {
             this.setAuth(false);
             this.setUser("");
+            this.setUser(false);
         } finally {
             this.setLoading(false);
         }

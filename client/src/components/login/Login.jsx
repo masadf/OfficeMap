@@ -2,8 +2,7 @@ import {useContext, useState} from "react";
 import toast, {Toaster} from 'react-hot-toast';
 import styles from "./Login.module.css"
 import {useNavigate} from "react-router-dom";
-import AuthService from "../../services/AuthService";
-import {Context} from "../../index";
+import { Context } from "../..";
 
 export const Login = () => {
     const {store} = useContext(Context)
@@ -18,7 +17,7 @@ export const Login = () => {
             return;
         }
         store.login(login, password)
-            .then(r => r.data.msg !== undefined ? toast.error(r.data.msg) : navigate("/"));
+            .then(r => r.data.msg !== undefined ? toast.error(r.data.msg) : navigate("/lomo"));
     }
     return (
         <div className={styles.wrapper}>
