@@ -1,5 +1,3 @@
-import re
-from tkinter import E
 from bson import ObjectId
 from pymongo import MongoClient
 

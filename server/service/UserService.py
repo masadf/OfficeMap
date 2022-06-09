@@ -1,4 +1,3 @@
-from matplotlib import use
 from pymongo import MongoClient
 import hashlib
 from random import choice

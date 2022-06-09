@@ -1,23 +1,13 @@
 from flask import Flask, request, make_response
 from controller.UserController import UserController
-from manager.EmployeeDBManager import EmployeeDBManager
 from service.EmployeeService import EmployeeService
 from service.TokenService import TokenService
 app = Flask(__name__)
-
-employeeDBManager = EmployeeDBManager()
-
 
 @app.route('/login', methods=["POST"])
 def login():
     request_data = request.get_json()
     return UserController.login(request_data["username"], request_data["password"])
-
-
-@app.route('/registration', methods=["POST"])
-def registration():
-    request_data = request.get_json()
-    return UserController.registration(request_data["username"], request_data["password"])
 
 
 @app.route('/logout', methods=["POST"])
@@ -49,11 +39,6 @@ def remove_employee_cab():
     print(request_data)
     EmployeeService.remove_cabinet(request_data["id"])
     return make_response({"msg": "Успешно!"}, 200)
-
-
-@app.route('/aboutEmployee', methods=["POST"])
-def get_employee_info():
-    return {"data": employeeDBManager.getInfoAboutPerson(request.get_json()["_id"])}
 
 
 @app.after_request

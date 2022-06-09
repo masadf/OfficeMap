@@ -26,12 +26,11 @@ class UserController:
         return response
 
     def _get_user_auth_data(username):
-        access_token, refresh_token = TokenService.getTokens(username)
+        isAdmin = UsersService.is_admin(username)
+        access_token, refresh_token = TokenService.getTokens(username,isAdmin)
         response = make_response(
-            {"username": username, "token": access_token, "isAdmin":UsersService.is_admin(username)}, 200)
+            {"username": username, "token": access_token, "isAdmin": isAdmin}, 200)
         TokenService.save_refresh_token(username, refresh_token)
         response.set_cookie("token", refresh_token,
                             max_age=60*60*24*30, samesite='None', secure=True)
         return response
-
-   
