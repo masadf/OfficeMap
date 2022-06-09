@@ -1,8 +1,5 @@
 import 'devextreme/dist/css/dx.common.css';
 import 'devextreme/dist/css/dx.light.css';
-
-
-
 import React, { useCallback, useContext, useRef, useState } from 'react';
 
 import VectorMap, {
@@ -68,23 +65,25 @@ const Map = ({ background, rooms, design }) => {
                         case "Руководители":
                             color = "purple";
                             break;
-                        case "Научные сотрудники":
+                        case "Учебный офис":
                             color = "blue";
                             break;
                         case "Преподаватели":
-                            color = "orange";
+                            color = "#6d0f30"
                             break;
                         case "Административные сотрудники":
                             color = "#ea5455"
                             break;
-                        case "Учебный офис":
+                        case "Научные сотрудники":
                             color = "#ff57b9"
                             break;
                         case "Аспиранты":
-                            color = "#4ad4c3"
+                            color = "orange";
                             break;
                         case "Студенты":
-                            color = "#6d0f30"
+                            color = "#4ad4c3"
+                            break;
+                        default:
                             break;
 
                     }

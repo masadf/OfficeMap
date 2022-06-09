@@ -9,7 +9,6 @@ export const AddEmployeeModal = ({ openModal, cabNum, reRender }) => {
     const { store } = useContext(Context);
     const [employee, setEmployee] = useState(undefined);
     const employeeHandler = (e) => {
-        console.log(e)
         setEmployee(e);
         if (e.cabNum) {
             toast("Данный сотрудник закреплён за другим местом!", {

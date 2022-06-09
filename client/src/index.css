@@ -3,6 +3,8 @@
     margin: 0;
     padding: 0;
     font-family: Source Code Pro;
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+    -webkit-tap-highlight-color: transparent;
 }
 
 html {
@@ -16,14 +18,10 @@ html {
 }
 
 .content {
-    padding-top: 2.2rem;
-    width: 80vw;
-    max-width: 1200px;
+    width: 100vw;
     display: grid;
     justify-content: center;
     justify-items: center;
     align-content: center;
-    gap: 1rem;
     grid-auto-rows: 1fr;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
 }

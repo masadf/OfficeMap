@@ -13,11 +13,11 @@ export const AuthHeader = () => {
                     <div className={styles.icon}>
                         <img src={logo} alt="" />
                     </div>
-                    DEPARTMENT OF PHYSICS
+                    <span> DEPARTMENT OF PHYSICS</span>
                 </Link>
 
                 <div className={styles.options}>
-                    <NavLink to={"/login"} className={({isActive}) =>`${isActive ? styles.active : styles.place}`}>Вход</NavLink>
+                    <NavLink to={"/login"} className={({ isActive }) => `${isActive ? styles.active : styles.place}`}>Вход</NavLink>
                 </div>
                 <div className={styles.burger} onClick={() => { setMenu(true); console.log(menu) }}>
                     <div className={styles.line}></div>

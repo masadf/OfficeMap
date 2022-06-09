@@ -18,7 +18,7 @@ const Header = () => {
                     <div className={styles.icon}>
                         <img src={logo} alt="" />
                     </div>
-                    DEPARTMENT OF PHYSICS
+                    <span> DEPARTMENT OF PHYSICS</span>
                 </Link>
 
                 <div className={styles.options}>

@@ -8,6 +8,7 @@ import background5 from './mapdata/5th_plan/5th_background.json';
 import design5 from './mapdata/5th_plan/5th_design.json';
 import arrow from "../../images/arrow.svg"
 import { useState } from "react";
+import { Legend } from "./Legend";
 export const ChurchPage = () => {
     const [office, setOffice] = useState(true);
     return (
@@ -21,7 +22,7 @@ export const ChurchPage = () => {
                         <img src={arrow} alt="" />
                     </div>
                 </div>
-
+                <Legend/>
                 {office &&
                     <div className={styles.item}>
                         <Map

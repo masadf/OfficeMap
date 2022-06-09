@@ -50,25 +50,10 @@ export default class Store {
         }
     }
 
-    async registration(username, password) {
-        this.setLoading(true);
-        try {
-            const response = await AuthService.registration(username, password);
-            localStorage.setItem("token", response.data.token);
-            this.setAuth(true);
-            this.setUser(response.data.username)
-            return response
-        } catch (e) {
-            return e.response
-        } finally {
-            this.setLoading(false);
-        }
-    }
-
     async logout() {
         this.setLoading(true);
         try {
-            const response = await AuthService.logout();
+            await AuthService.logout();
             localStorage.removeItem("token");
             this.setAuth(false);
             this.setUser("");
@@ -92,11 +77,11 @@ export default class Store {
             localStorage.setItem("token", response.data.token);
             this.setAuth(true);
             this.setUser(response.data.username);
-            this.setUser(response.data.isAdmin);
+            this.setAdmin(response.data.isAdmin);
         } catch (e) {
             this.setAuth(false);
             this.setUser("");
-            this.setUser(false);
+            this.setAdmin(false);
         } finally {
             this.setLoading(false);
         }
@@ -116,7 +101,7 @@ export default class Store {
     async setEmployeeCab(id, cabNum) {
         this.setLoading(true);
         try {
-            const response = await axios.post(`${API_URL}/employee/set-cab`, { id, cabNum });
+            await axios.post(`${API_URL}/employee/set-cab`, { id, cabNum });
         } catch (e) {
 
         } finally {

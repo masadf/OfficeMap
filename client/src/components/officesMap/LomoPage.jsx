@@ -10,6 +10,7 @@ import background3 from './mapdata/3rd_plan/3rd_background.json';
 import design3 from './mapdata/3rd_plan/3rd_design.json';
 import arrow from "../../images/arrow.svg"
 import { useState } from "react";
+import { Legend } from "./Legend";
 export const LomoPage = () => {
     const [office, setOffice] = useState(-1);
 
@@ -39,7 +40,7 @@ export const LomoPage = () => {
                         <img src={arrow} alt="" />
                     </div>
                 </div>
-
+                <Legend/>
                 {office === -1 &&
                     <div className={styles.item}>
                         <Map

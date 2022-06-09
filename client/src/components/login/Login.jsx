@@ -1,11 +1,11 @@
-import {useContext, useState} from "react";
-import toast, {Toaster} from 'react-hot-toast';
+import { useContext, useState } from "react";
+import toast, { Toaster } from 'react-hot-toast';
 import styles from "./Login.module.css"
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Context } from "../..";
 
 export const Login = () => {
-    const {store} = useContext(Context)
+    const { store } = useContext(Context)
     const navigate = useNavigate();
     const [login, setLogin] = useState("");
     const [password, setPassword] = useState("");
@@ -21,9 +21,11 @@ export const Login = () => {
     }
     return (
         <div className={styles.wrapper}>
-            <Toaster
-                position="bottoms-right"
-            />
+  
+                <Toaster
+                    position="bottoms-right"
+                />
+           
             <form onSubmit={(e) => handleSubmit(e)} className={styles.content}>
                 <div className={styles.header}>Войти</div>
                 <div className={styles.input_block}>
@@ -32,7 +34,7 @@ export const Login = () => {
                     </div>
                     <div className={styles.input}>
                         <input name="login" value={login} type="text"
-                               onChange={(e) => setLogin(e.currentTarget.value)}/>
+                            onChange={(e) => setLogin(e.currentTarget.value)} />
                     </div>
                 </div>
                 <div className={styles.input_block}>
@@ -41,7 +43,7 @@ export const Login = () => {
                     </div>
                     <div className={styles.input}>
                         <input name="password" value={password} onChange={(e) => setPassword(e.currentTarget.value)}
-                               type="password"/>
+                            type="password" />
                     </div>
                 </div>
                 <div className={styles.button}>
