@@ -108,6 +108,18 @@ export default class Store {
             this.setLoading(false);
         }
     }
+
+    async removeEmployeeCab(id) {
+        this.setLoading(true);
+        try {
+            await axios.post(`${API_URL}/employee/remove-cab`, { id });
+        } catch (e) {
+
+        } finally {
+            this.setLoading(false);
+        }
+    }
+
     getEmployeeById(id) {
         for (let element of this.employeeData) {
             if (element["_id"] === id) {
